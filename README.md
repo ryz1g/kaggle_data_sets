@@ -1,5 +1,5 @@
 # kaggle_data_sets
-This repository contains the code for various Kaggle Data sets that I have solved.
+This repository contains the code for various Kaggle Data sets that I have solved. Models are just made and haven't been fully trained. They are working, just need to be trained. For trained models, there is a json and h5 file for model architecture and model weights attached.
 
 Kaggle Links-
 

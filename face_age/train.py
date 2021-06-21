@@ -27,15 +27,18 @@ val_y = np.load("val_y_.npy")
 
 
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Conv2D(64, (5, 5), input_shape=(200, 200, 1), activation="relu"))
+model.add(tf.keras.layers.Conv2D(64, (7, 7), input_shape=(200, 200, 1), activation="relu"))
+model.add(tf.keras.layers.MaxPooling2D(3, 3))
+model.add(tf.keras.layers.Conv2D(64, (5, 5), activation="relu"))
 model.add(tf.keras.layers.MaxPooling2D(3, 3))
 model.add(tf.keras.layers.Conv2D(32, (3, 3), activation="relu"))
 model.add(tf.keras.layers.MaxPooling2D(2, 2))
 model.add(tf.keras.layers.Flatten())
+model.add(tf.keras.layers.Dropout(0.4))
 model.add(tf.keras.layers.Dense(128, activation="relu"))
-model.add(tf.keras.layers.Dense(1, activation="relu"))
+model.add(tf.keras.layers.Dense(1))
 
-# model.load_weights("model.h5")
+# model.load_weights("model_new.h5")
 
 model.compile(optimizer="Adam", loss="mse", metrics=['accuracy'])
 history = model.fit(data_x, data_y, validation_data=(val_x, val_y), shuffle=True, verbose=1, epochs=25, batch_size=128, callbacks=[myCall()])

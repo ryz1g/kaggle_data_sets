@@ -7,7 +7,7 @@ loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
 loaded_model.load_weights("model_new.h5")
-correct = [-1, 22, 3, 25, 55, 60, 25, 80, 75, 50, 50, 81, 3, 55, 70, 45, 55, 20, 25, 50, 17, 3, 20, 28]
+# correct = [-1, 22, 3, 25, 55, 60, 25, 80, 75, 50, 50, 81, 3, 55, 70, 45, 55, 20, 25, 50, 17, 3, 20, 28]
 corr = [-1, 45, 45, 45, 7, 7, 31, 31, 56, 56]
 
 for i in range(1, 10):

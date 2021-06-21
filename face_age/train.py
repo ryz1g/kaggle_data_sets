@@ -1,26 +1,30 @@
 import tensorflow as tf
+from tensorflow import keras
 import matplotlib.pyplot as plt
 import numpy as np
+from tensorflow.keras.models import model_from_json
 
 
-def plot_graphs(history, string):
-    plt.plot(history.history[string][1:])
-    plt.plot(history.history["val_loss"][1:])
+def plot_graphs(history, string, t):
+    if t==1:
+      plt.plot(history.history["val_loss"][1:], color="green")
+    plt.plot(history.history[string][1:], color='red')
     plt.xlabel("Epochs")
     plt.ylabel(string)
     plt.show()
 
-
-class myCall(tf.keras.callbacks.Callback):
-    def on_epoch_end(self, epoch, logs={}):
-        if(logs.get('accuracy')>0.8):
-            self.model.stop_training = True
+    
+class myCall(tf.keras.callbacks.Callback) :
+    def on_epoch_end(self, epoch, logs={}) :
+        if(logs.get('val_loss')<7) :
+            self.model.stop_training=True
 
 
 data_x = np.load("data_x_.npy")
 data_y = np.load("data_y_.npy")
 val_x = np.load("val_x_.npy")
 val_y = np.load("val_y_.npy")
+
 
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Conv2D(64, (5, 5), input_shape=(200, 200, 1), activation="relu"))

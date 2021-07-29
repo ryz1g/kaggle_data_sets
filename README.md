@@ -8,3 +8,5 @@ mobile_phone_classification - https://www.kaggle.com/iabhishekofficial/mobile-pr
 titanic_survival - https://www.kaggle.com/c/titanic
 
 face_age - https://www.kaggle.com/frabbisw/facial-age
+
+Instagram Classification - https://www.kaggle.com/bahramjannesarr/instagram-page-screen-shots-in-5-category

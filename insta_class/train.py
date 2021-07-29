@@ -13,7 +13,7 @@ def plot_graphs(history, string):
 
 class myCall(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
-        if(logs.get('loss')<0.5):
+        if(logs.get('val_loss')<0.5):
             self.model.stop_training = True
 
 
@@ -23,14 +23,21 @@ val_x = np.load("val_x.npy")
 val_y = np.load("val_y.npy")
 
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Conv2D(64, (5, 5), input_shape=(600, 300, 3), activation="relu"))
+model.add(tf.keras.layers.Conv2D(64, (7, 7), input_shape=(600, 300, 3), activation="relu"))
 model.add(tf.keras.layers.MaxPooling2D(3, 3))
+model.add(tf.keras.layers.Conv2D(64, (5, 5), activation="relu"))
+model.add(tf.keras.layers.MaxPooling2D(2, 2))
 model.add(tf.keras.layers.Conv2D(32, (3, 3), activation="relu"))
 model.add(tf.keras.layers.MaxPooling2D(2, 2))
+model.add(tf.keras.layers.Conv2D(32, (3, 3), activation="relu"))
+model.add(tf.keras.layers.MaxPooling2D(2, 2))
+# model.add(tf.keras.layers.MaxPooling2D(2, 2))
 model.add(tf.keras.layers.Flatten())
-model.add(tf.keras.layers.Dropout(0.3))
+model.add(tf.keras.layers.Dropout(0.2))
+model.add(tf.keras.layers.Dense(256, activation="relu"))
+model.add(tf.keras.layers.Dropout(0.1))
 model.add(tf.keras.layers.Dense(128, activation="relu"))
-model.add(tf.keras.layers.Dense(64, activation="relu"))
+model.add(tf.keras.layers.Dense(32, activation="relu"))
 model.add(tf.keras.layers.Dense(5, activation='softmax'))
 
 # model.load_weights("model.h5")
